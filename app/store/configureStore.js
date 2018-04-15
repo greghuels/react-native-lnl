@@ -1,3 +1,5 @@
+/* eslint-disable global-require */
+
 const requireDev = () => require('./configureStore.dev').default;
 
 const requireProd = () => require('./configureStore.prod').default;

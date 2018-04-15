@@ -3,9 +3,7 @@ import {
   EXAMPLE_REQUEST_START,
   EXAMPLE_REQUEST_DATA,
 } from '../constants/Constants';
-import {
-  exampleRequest,
-} from '../requester';
+import { exampleRequest } from '../requester';
 
 /** Toggle the hello world color */
 export function toggleColor() {
@@ -14,10 +12,10 @@ export function toggleColor() {
 
 /** An example async action using the request module */
 export function exampleAsync() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({ type: EXAMPLE_REQUEST_START });
-    exampleRequest().then(data => {
-      dispatch({ type: EXAMPLE_REQUEST_DATA, data: data });
+    exampleRequest().then((data) => {
+      dispatch({ type: EXAMPLE_REQUEST_DATA, data });
     });
   };
 }

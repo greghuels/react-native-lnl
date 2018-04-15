@@ -1,4 +1,5 @@
 import request from 'superagent';
+
 const baseURL = 'http://localhost:3000';
 
 /**
@@ -7,7 +8,7 @@ const baseURL = 'http://localhost:3000';
  */
 export function exampleRequest() {
   return new Promise((resolve, reject) => {
-    request.get(baseURL + '/example')
+    request.get(`${baseURL}/example`)
       .query({})
       .end((err, res) => {
         if (err) {
@@ -15,7 +16,6 @@ export function exampleRequest() {
         } else {
           resolve(res.body);
         }
-      }
-    );
+      });
   });
 }
