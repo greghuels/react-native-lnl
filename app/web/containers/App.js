@@ -1,35 +1,24 @@
-import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-// dumb components
+import React, { Component } from 'react';
+
+import { getHelloWorldColor } from '../../common/redux/helloWorld/selectors';
 import Header from '../components/Header';
 import HelloWorld from '../components/HelloWorld';
-// actions
-import { toggleColor } from '../../actions/actions';
 
 /** The app entry point */
 class ReactNativeWebHelloWorld extends Component {
   render() {
-    // injected by connect call
-    const { dispatch, color } = this.props;
-
     return (
       <div className="react-native-web">
         <Header />
-        <HelloWorld
-          onClick={() => dispatch(toggleColor())}
-          color={color}
-        />
+        <HelloWorld />
       </div>
     );
   }
 }
 
-ReactNativeWebHelloWorld.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  color: PropTypes.string.isRequired,
-};
+const mapStateToProps = state => ({
+  color: getHelloWorldColor(state),
+});
 
-const select = state => state;
-
-// Wrap the component to inject dispatch and state into it
-export default connect(select)(ReactNativeWebHelloWorld);
+export default connect(mapStateToProps)(ReactNativeWebHelloWorld);

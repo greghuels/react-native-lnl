@@ -1,13 +1,17 @@
+import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
 
-export default class HelloWorld extends Component {
+import { getHelloWorldColor } from '../../common/redux/helloWorld/selectors';
+import { toggleHelloWorldColor } from '../../common/redux/helloWorld/actions';
+
+class HelloWorld extends Component {
   render() {
-    const { onClick, color } = this.props;
+    const { color } = this.props;
     return (
       <span
         className="hello-world"
-        onClick={onClick}
-        onKeyDown={onClick}
+        onClick={this.props.toggleHelloWorldColor}
+        onKeyDown={this.props.toggleHelloWorldColor}
         style={{ color }}
         role="button"
         tabIndex="0"
@@ -19,6 +23,12 @@ export default class HelloWorld extends Component {
 }
 
 HelloWorld.propTypes = {
-  onClick: PropTypes.func.isRequired,
   color: PropTypes.string.isRequired,
+  toggleHelloWorldColor: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = state => ({
+  color: getHelloWorldColor(state),
+});
+
+export default connect(mapStateToProps, { toggleHelloWorldColor })(HelloWorld);

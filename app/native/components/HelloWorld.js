@@ -1,28 +1,42 @@
-import React, { Component, PropTypes } from 'react';
 import {
   View,
   Text,
   StyleSheet,
 } from 'react-native';
+import { connect } from 'react-redux';
+import React, { Component, PropTypes } from 'react';
 
-export default class HelloWorld extends Component {
+import { getHelloWorldColor } from '../../common/redux/helloWorld/selectors';
+import { toggleHelloWorldColor } from '../../common/redux/helloWorld/actions';
+
+const styles = StyleSheet.create({
+  helloWorld: {
+    textAlign: 'center',
+  },
+});
+
+class HelloWorld extends Component {
   render() {
-    const { onPress, color } = this.props;
-    const style = StyleSheet.create({
-      helloWorld: {
-        color,
-        textAlign: 'center',
-      },
-    });
     return (
       <View>
-        <Text onPress={onPress} style={style.helloWorld}>Hello World</Text>
+        <Text
+          onPress={this.props.toggleHelloWorldColor}
+          style={[styles.helloWorld, { color: this.props.color }]}
+        >
+          Hello World
+        </Text>
       </View>
     );
   }
 }
 
 HelloWorld.propTypes = {
-  onPress: PropTypes.func.isRequired,
   color: PropTypes.string.isRequired,
+  toggleHelloWorldColor: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = state => ({
+  color: getHelloWorldColor(state),
+});
+
+export default connect(mapStateToProps, { toggleHelloWorldColor })(HelloWorld);

@@ -1,9 +1,9 @@
-import React from 'react';
 import { render } from 'react-dom';
-import Root from './containers/Root';
-import configureStore from '../store/configureStore';
+import React from 'react';
 
-// load our css
+import Root from './containers/Root';
+import configureStore from '../common/redux/configureStore';
+
 require('./styles/style.less');
 
 const store = configureStore();

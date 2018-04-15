@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import StockApp from '../reducers';
+import StockApp from './rootReducer';
 
 // create a store that has redux-thunk middleware enabled
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
